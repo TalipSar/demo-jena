@@ -1,0 +1,668 @@
+@prefix dc:     <http://purl.org/dc/elements/1.1/> .
+@prefix dct:    <http://purl.org/dc/terms/> .
+@prefix euvoc:  <http://publications.europa.eu/ontology/euvoc#> .
+@prefix foaf:   <http://xmlns.com/foaf/0.1/> .
+@prefix jolux:  <http://data.legilux.public.lu/resource/ontology/jolux#> .
+@prefix org:    <http://www.w3.org/ns/org#> .
+@prefix owl:    <http://www.w3.org/2002/07/owl#> .
+@prefix prov:   <http://www.w3.org/ns/prov#> .
+@prefix rdf:    <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs:   <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix schema: <http://schema.org/> .
+@prefix sh:     <http://www.w3.org/ns/shacl#> .
+@prefix skos:   <http://www.w3.org/2004/02/skos/core#> .
+@prefix skosxl: <http://www.w3.org/2008/05/skos-xl#> .
+@prefix tl:     <http://www.dumbdata.orgoio/> .
+@prefix xsd:    <http://www.w3.org/2001/XMLSchema#> .
+
+tl:TreatyProcessShape
+    a              sh:NodeShape ;
+    sh:targetClass jolux:TreatyProcess .
+
+tl:treatyProcessHasTaskShape
+    a        sh:PropertyShape ;
+    sh:class jolux:TaskForTreaty ;
+    sh:name  "Processus du traité à des tâches"@fr ;
+    sh:path  jolux:treatyProcessHasTask .
+
+jolux:TreatyProcessShape
+    sh:property tl:bilateralShape, tl:needForRatificationShape, tl:titleTreatyShape, tl:treatyApprobationActShape,
+                tl:treatyBasedOnTreatyShape, tl:treatyCommentShape, tl:treatyDomainShape, tl:treatyIdShape,
+                tl:treatyInForceStatusForLuxShape, tl:treatyInForceStatusShape, tl:treatyPartyCountryShape,
+                tl:treatyPartyOrganisationShape, tl:treatyProcessHasTaskDraftShape, tl:treatyProcessHasTaskShape,
+                tl:treatySignatureDateShape, tl:treatySignaturePlaceShape, tl:treatySubjectShape, tl:treatyTypeShape .
+
+tl:bilateralShape
+    a           sh:PropertyShape ;
+    sh:datatype xsd:boolean ;
+    sh:maxCount 1 ;
+    sh:name     "Traité bilatéral"@fr ;
+    sh:path     jolux:bilateral .
+
+tl:needForRatificationShape
+    a           sh:PropertyShape ;
+    sh:datatype xsd:boolean ;
+    sh:maxCount 1 ;
+    sh:name     "Traité nécessitant une ratification (O/N)"@fr ;
+    sh:path     jolux:needForRatification .
+
+tl:treatyIdShape
+    a           sh:PropertyShape ;
+    sh:datatype xsd:long ;
+    sh:maxCount 1 ;
+    sh:minCount 1 ;
+    sh:name     "Identifiant du traité"@fr ;
+    sh:path     jolux:treatyId .
+
+tl:titleTreatyShape
+    a             sh:PropertyShape ;
+    sh:datatype   rdf:langString ;
+    sh:name       "Dénomination du traité"@fr ;
+    sh:path       jolux:titleTreaty ;
+    sh:uniqueLang true .
+
+tl:treatyTypeShape
+    a           sh:PropertyShape ;
+    sh:class    jolux:TreatyType ;
+    sh:maxCount 1 ;
+    sh:minCount 1 ;
+    sh:name     "Type du traité"@fr ;
+    sh:path     jolux:treatyType .
+
+tl:treatyDomainShape
+    a           sh:PropertyShape ;
+    sh:class    jolux:TreatyDomain ;
+    sh:maxCount 1 ;
+    sh:name     "Domaine du traité"@fr ;
+    sh:path     jolux:treatyDomain .
+
+tl:treatySignaturePlaceShape
+    a           sh:PropertyShape ;
+    sh:datatype xsd:string ;
+    sh:maxCount 1 ;
+    sh:name     "Lieu de signature du traité"@fr ;
+    sh:path     jolux:treatySignaturePlace .
+
+tl:treatySignatureDateShape
+    a           sh:PropertyShape ;
+    sh:datatype xsd:date ;
+    sh:maxCount 1 ;
+    sh:name     "Date de signature du traité"@fr ;
+    sh:path     jolux:treatySignatureDate .
+
+tl:treatyPartyCountryShape
+    a        sh:PropertyShape ;
+    sh:class jolux:Country ;
+    sh:name  "Pays partie du traité"@fr ;
+    sh:path  jolux:treatyPartyCountry .
+
+tl:treatyPartyOrganisationShape
+    a       sh:PropertyShape ;
+    sh:name "Organisation partie du traité autre que des pays"@fr ;
+    sh:or   _:node1dvr30brkx977 .
+
+_:node1dvr30brkx977
+    rdf:first _:node1dvr30brkx978 .
+
+_:node1dvr30brkx978
+    sh:class jolux:InternationalActor .
+
+_:node1dvr30brkx977
+    rdf:rest _:node1dvr30brkx979 .
+
+_:node1dvr30brkx979
+    rdf:first _:node1dvr30brkx980 .
+
+_:node1dvr30brkx980
+    sh:class jolux:LegalInstitution .
+
+_:node1dvr30brkx979
+    rdf:rest rdf:nil .
+
+tl:treatyPartyOrganisationShape
+    sh:path jolux:treatyPartyOrganisation .
+
+tl:treatyProcessHasTaskDraftShape
+    a           sh:PropertyShape ;
+    sh:class    jolux:Draft ;
+    sh:maxCount 1 ;
+    sh:name     "Traité a un tache projet"@fr ;
+    sh:path     jolux:treatyProcessHasTaskDraft .
+
+tl:treatySubjectShape
+    a           sh:PropertyShape ;
+    sh:class    jolux:TreatySubjectTheme ;
+    sh:maxCount 1 ;
+    sh:name     "Thématique du traité"@fr ;
+    sh:path     jolux:treatySubject .
+
+tl:treatyBasedOnTreatyShape
+    a           sh:PropertyShape ;
+    sh:class    jolux:TreatyProcess ;
+    sh:maxCount 1 ;
+    sh:name     "Traité de base"@fr ;
+    sh:path     jolux:treatyBasedOnTreaty .
+
+tl:treatyInForceStatusShape
+    a           sh:PropertyShape ;
+    sh:class    jolux:InforcementStatus ;
+    sh:maxCount 1 ;
+    sh:name     "Statut de mise en vigueur du traité"@fr ;
+    sh:path     jolux:treatyInForceStatus .
+
+tl:treatyInForceStatusForLuxShape
+    a           sh:PropertyShape ;
+    sh:class    jolux:InforcementStatus ;
+    sh:maxCount 1 ;
+    sh:name     "Statut de mise en vigueur du traité pour le Luxembourg"@fr ;
+    sh:path     jolux:treatyInForceStatusForLux .
+
+tl:treatyCommentShape
+    a           sh:PropertyShape ;
+    sh:datatype xsd:string ;
+    sh:minCount 0 ;
+    sh:name     "Remarque"@fr ;
+    sh:path     jolux:treatyComment .
+
+tl:treatyApprobationActShape
+    a        sh:PropertyShape ;
+    sh:class jolux:NationalLegalResource ;
+    sh:name  "Loi d'approbation"@fr ;
+    sh:path  jolux:treatyApprobationAct .
+
+tl:FullPowerSignatureShape
+    a              sh:NodeShape ;
+    sh:targetClass jolux:FullPowerSignature .
+
+tl:isTaskOfTreatyProcessShape
+    a           sh:PropertyShape ;
+    sh:class    jolux:TreatyProcess ;
+    sh:maxCount 1 ;
+    sh:minCount 1 ;
+    sh:name     "Traité pour lequel la tâche est réalisée"@fr ;
+    sh:path     jolux:isTaskOfTreatyProcess .
+
+jolux:FullPowerSignatureShape
+    sh:property tl:fullPowersDeliveredToShape, tl:fullPowersDeliveringDateShape, tl:isTaskOfTreatyProcessShape .
+
+tl:fullPowersDeliveredToShape
+    a           sh:PropertyShape ;
+    sh:datatype xsd:string ;
+    sh:maxCount 1 ;
+    sh:name     "Personne ou organisation à qui le document de pleins pouvoirs a été remis"@fr ;
+    sh:path     jolux:fullPowersDeliveredTo .
+
+tl:fullPowersDeliveringDateShape
+    a           sh:PropertyShape ;
+    sh:datatype xsd:Date ;
+    sh:maxCount 1 ;
+    sh:name     "Date de remise des pleins pouvoirs"@fr ;
+    sh:path     jolux:fullPowersDeliveringDate .
+
+tl:TreatySignatureShape
+    a              sh:NodeShape ;
+    sh:targetClass jolux:TreatySignature .
+
+jolux:TreatySignatureShape
+    sh:property tl:isTaskOfTreatyProcessShape, tl:languageShape, tl:treatyLuxembourgSignatureDateShape,
+                tl:treatyLuxembourgSignaturePlaceShape, tl:treatySignaturePlaceShape,
+                tl:treatySignedForLuxembourgByShape, tl:treatySignedForOtherPartiesByShape .
+
+tl:treatySignedForLuxembourgByShape
+    a           sh:PropertyShape ;
+    sh:datatype xsd:string ;
+    sh:maxCount 1 ;
+    sh:name     "Signataire du traité pour le Luxembourg (personne et rôle)"@fr ;
+    sh:path     jolux:treatySignedForLuxembourgBy .
+
+tl:treatySignedForOtherPartiesByShape
+    a           sh:PropertyShape ;
+    sh:datatype xsd:string ;
+    sh:maxCount 1 ;
+    sh:name     "Signataire du traité pour les autres parties (personne et rôle)"@fr ;
+    sh:path     jolux:treatySignedForOtherPartiesBy .
+
+tl:treatyLuxembourgSignatureDateShape
+    a           sh:PropertyShape ;
+    sh:datatype xsd:date ;
+    sh:maxCount 1 ;
+    sh:name     "Date de signature du traité par le Luxembourg"@fr ;
+    sh:path     jolux:treatyLuxembourgSignatureDate .
+
+tl:languageShape
+    a           sh:PropertyShape ;
+    sh:class    jolux:Language ;
+    sh:maxCount 1 ;
+    sh:name     "Langues dans lequel le taité est  disponible"@fr ;
+    sh:path     jolux:language .
+
+tl:treatyLuxembourgSignaturePlaceShape
+    a           sh:PropertyShape ;
+    sh:datatype xsd:string ;
+    sh:maxCount 1 ;
+    sh:name     "Lieu de signature du traité par le Luxembourg"@fr ;
+    sh:path     jolux:treatyLuxembourgSignaturePlace .
+
+tl:SignedTreatyReceptionShape
+    a              sh:NodeShape ;
+    sh:targetClass jolux:SignedTreatyReception .
+
+jolux:SignedTreatyReceptionShape
+    sh:property
+        tl:isTaskOfTreatyProcessShape, tl:signedTreatyCopyReceptionDateShape, tl:signedTreatyReceptionDateShape .
+
+tl:signedTreatyReceptionDateShape
+    a           sh:PropertyShape ;
+    sh:datatype xsd:date ;
+    sh:maxCount 1 ;
+    sh:name     "Date de réception du traité original signé"@fr ;
+    sh:path     jolux:signedTreatyReceptionDate .
+
+tl:signedTreatyCopyReceptionDateShape
+    a           sh:PropertyShape ;
+    sh:datatype xsd:date ;
+    sh:maxCount 1 ;
+    sh:name     "Date de réception de la copie du traité signé"@fr ;
+    sh:path     jolux:signedTreatyCopyReceptionDate .
+
+tl:ExplanatoryMemorandumRequestShape
+    a              sh:NodeShape ;
+    sh:targetClass jolux:ExplanatoryMemorandumRequest .
+
+jolux:ExplanatoryMemorandumRequestShape
+    sh:property tl:explanatoryMemorandumReceptionDateShape, tl:explanatoryMemorandumRequestDateShape,
+                tl:explanatoryMemorandumRequestFromShape, tl:explanatoryMemorandumRequestToShape,
+                tl:isTaskOfTreatyProcessShape, tl:resumptionOfShape .
+
+tl:explanatoryMemorandumRequestDateShape
+    a           sh:PropertyShape ;
+    sh:datatype xsd:date ;
+    sh:maxCount 1 ;
+    sh:name     "Date de demande de l'exposé des motifs"@fr ;
+    sh:path     jolux:explanatoryMemorandumRequestDate .
+
+tl:explanatoryMemorandumRequestFromShape
+    a           sh:PropertyShape ;
+    sh:class    jolux:LegalInstitution ;
+    sh:maxCount 1 ;
+    sh:minCount 1 ;
+    sh:name     "Organisme qui demande l'exposé des motifs"@fr ;
+    sh:path     jolux:explanatoryMemorandumRequestFrom .
+
+tl:explanatoryMemorandumRequestToShape
+    a        sh:PropertyShape ;
+    sh:class jolux:LegalInstitution ;
+    sh:name  "Organisme à qui l'on demande l'exposé des motifs"@fr ;
+    sh:path  jolux:explanatoryMemorandumRequestTo .
+
+tl:resumptionOfShape
+    a        sh:PropertyShape ;
+    sh:class jolux:ExplanatoryMemorandumRequest ;
+    sh:name  "Indique la demande initiale pour laquelle on fait une relance"@fr ;
+    sh:path  jolux:resumptionOf .
+
+tl:explanatoryMemorandumReceptionDateShape
+    a           sh:PropertyShape ;
+    sh:datatype xsd:date ;
+    sh:maxCount 1 ;
+    sh:name     "Date de réception de l'exposé des motifs"@fr ;
+    sh:path     jolux:explanatoryMemorandumReceptionDate .
+
+tl:ReferralToConseilGouvernementShape
+    a              sh:NodeShape ;
+    sh:targetClass jolux:ReferralToConseilGouvernement .
+
+jolux:ReferralToConseilGouvernementShape
+    sh:property tl:draftLegislationApprovalDateShape, tl:isTaskOfTreatyProcessShape, tl:memorandumOnAgendaOnDateShape,
+                tl:referralFromShape, tl:referralToConseilGouvernementDateShape, tl:referralToShape .
+
+tl:referralToConseilGouvernementDateShape
+    a           sh:PropertyShape ;
+    sh:datatype xsd:date ;
+    sh:maxCount 1 ;
+    sh:name     "Date de transmission du dossier au Conseil de Gouvernement"@fr ;
+    sh:path     jolux:referralToConseilGouvernementDate .
+
+tl:referralFromShape
+    a        sh:PropertyShape ;
+    sh:class jolux:LegalInstitution ;
+    sh:name  "Organisme qui  a transmis le dossier"@fr ;
+    sh:path  jolux:referralFrom .
+
+tl:referralToShape
+    a        sh:PropertyShape ;
+    sh:class jolux:LegalInstitution ;
+    sh:name  "Organisme à qui l'on a transmis le dossier"@fr ;
+    sh:path  jolux:referralTo .
+
+tl:memorandumOnAgendaOnDateShape
+    a           sh:PropertyShape ;
+    sh:datatype xsd:date ;
+    sh:maxCount 1 ;
+    sh:name     "Date de mise à l'ordre du jour du Conseil de Gouvernement"@fr ;
+    sh:path     jolux:memorandumOnAgendaOnDate .
+
+tl:draftLegislationApprovalDateShape
+    a           sh:PropertyShape ;
+    sh:datatype xsd:date ;
+    sh:maxCount 1 ;
+    sh:name     "Date d'approbation de l'avant-projet de loi par le Conseil de Gouvernement"@fr ;
+    sh:path     jolux:draftLegislationApprovalDate .
+
+tl:TransmissionOfSignedInstrumentShape
+    a              sh:NodeShape ;
+    sh:targetClass jolux:TransmissionOfSignedInstrument .
+
+jolux:TransmissionOfSignedInstrumentShape
+    sh:property tl:isTaskOfTreatyProcessShape, tl:relatedInstrumentShape, tl:reservationAndDeclarationShape,
+                tl:signedInstrumentTransmissionDateShape, tl:signedInstrumentTransmissionToShape .
+
+tl:signedInstrumentTransmissionToShape
+    a           sh:PropertyShape ;
+    sh:class    jolux:LegalInstitution ;
+    sh:maxCount 1 ;
+    sh:minCount 1 ;
+    sh:name     "Transmis à"@fr ;
+    sh:path     jolux:signedInstrumentTransmissionTo .
+
+tl:signedInstrumentTransmissionDateShape
+    a           sh:PropertyShape ;
+    sh:datatype xsd:date ;
+    sh:maxCount 1 ;
+    sh:name     "Date de transmission de l'instrument"@fr ;
+    sh:path     jolux:signedInstrumentTransmissionDate .
+
+tl:relatedInstrumentShape
+    a           sh:PropertyShape ;
+    sh:class    jolux:Instrument ;
+    sh:maxCount 1 ;
+    sh:minCount 1 ;
+    sh:name     "Instrument relié"@fr ;
+    sh:path     jolux:relatedInstrument .
+
+tl:reservationAndDeclarationShape
+    a           sh:PropertyShape ;
+    sh:datatype xsd:string ;
+    sh:name     "Existance de réserves et déclarations"@fr, "Réserves et déclarations"@fr ;
+    sh:path     jolux:reservationAndDeclaration .
+
+tl:InstrumentShape
+    a              sh:NodeShape ;
+    sh:targetClass jolux:Instrument .
+
+jolux:InstrumentShape
+    sh:property
+        tl:instrumentSignatureDateShape, tl:instrumentTypeShape, tl:isTaskOfTreatyProcessShape, tl:signedByShape .
+
+tl:instrumentTypeShape
+    a           sh:PropertyShape ;
+    sh:class    jolux:InstrumentType ;
+    sh:maxCount 1 ;
+    sh:minCount 1 ;
+    sh:name     "Type d'instrument"@fr ;
+    sh:path     jolux:instrumentType .
+
+tl:signedByShape
+    a           sh:PropertyShape ;
+    sh:class    jolux:LegalInstitution ;
+    sh:maxCount 1 ;
+    sh:minCount 1 ;
+    sh:name     "Signé par"@fr ;
+    sh:path     jolux:signedBy .
+
+tl:instrumentSignatureDateShape
+    a           sh:PropertyShape ;
+    sh:datatype xsd:date ;
+    sh:maxCount 1 ;
+    sh:name     "Date de signature de l'instrument"@fr ;
+    sh:path     jolux:instrumentSignatureDate .
+
+jolux:EchangeOfNoteShape
+    sh:property tl:isTaskOfTreatyProcessShape, tl:jolux:noteFromShape, tl:noteDateShape, tl:noteToShape,
+                tl:reservationAndDeclarationShape .
+
+tl:noteDateShape
+    a           sh:PropertyShape ;
+    sh:datatype xsd:date ;
+    sh:maxCount 1 ;
+    sh:name     "Date de la note"@fr ;
+    sh:path     jolux:noteDate .
+
+tl:jolux:noteFromShape
+    a       sh:PropertyShape ;
+    sh:name "Note de"@fr ;
+    sh:or   _:node1dvr30brkx981 .
+
+_:node1dvr30brkx981
+    rdf:first _:node1dvr30brkx982 .
+
+_:node1dvr30brkx982
+    sh:class jolux:InternationalActor .
+
+_:node1dvr30brkx981
+    rdf:rest _:node1dvr30brkx983 .
+
+_:node1dvr30brkx983
+    rdf:first _:node1dvr30brkx984 .
+
+_:node1dvr30brkx984
+    sh:class jolux:LegalInstitution .
+
+_:node1dvr30brkx983
+    rdf:rest rdf:nil .
+
+tl:jolux:noteFromShape
+    sh:path jolux:noteFrom .
+
+tl:noteToShape
+    a       sh:PropertyShape ;
+    sh:name "Note à"@fr ;
+    sh:or   _:node1dvr30brkx985 .
+
+_:node1dvr30brkx985
+    rdf:first _:node1dvr30brkx986 .
+
+_:node1dvr30brkx986
+    sh:class jolux:InternationalActor .
+
+_:node1dvr30brkx985
+    rdf:rest _:node1dvr30brkx987 .
+
+_:node1dvr30brkx987
+    rdf:first _:node1dvr30brkx988 .
+
+_:node1dvr30brkx988
+    sh:class jolux:LegalInstitution .
+
+_:node1dvr30brkx987
+    rdf:rest rdf:nil .
+
+tl:noteToShape
+    sh:path jolux:noteTo .
+
+tl:EntryIntoForceShape
+    a              sh:NodeShape ;
+    sh:targetClass jolux:EntryIntoForce .
+
+jolux:EntryIntoForceShape
+    sh:property tl:entryIntoForceBasedOnShape, tl:entryIntoForceDateShape, tl:entryIntoForceForShape,
+                tl:entryIntoForceRelatedActShape, tl:isTaskOfTreatyProcessShape .
+
+tl:entryIntoForceBasedOnShape
+    a           sh:PropertyShape ;
+    sh:class    jolux:Instrument ;
+    sh:maxCount 1 ;
+    sh:minCount 0 ;
+    sh:name     "Base de l'événement d'entrée en force"@fr ;
+    sh:path     jolux:entryIntoForceBasedOn .
+
+tl:entryIntoForceDateShape
+    a           sh:PropertyShape ;
+    sh:datatype xsd:date ;
+    sh:maxCount 1 ;
+    sh:name     "Date d'entrée en vigueur"@fr ;
+    sh:path     jolux:entryIntoForceDate .
+
+tl:entryIntoForceRelatedActShape
+    a           sh:PropertyShape ;
+    sh:class    jolux:NationalLegalResource ;
+    sh:maxCount 1 ;
+    sh:name     "Référence de l'acte"@fr ;
+    sh:path     jolux:entryIntoForceRelatedAct .
+
+tl:entryIntoForceForShape
+    a           sh:PropertyShape ;
+    sh:class    jolux:entryIntoForceFor ;
+    sh:maxCount 1 ;
+    sh:minCount 0 ;
+    sh:name     "Entrée en vigueur pour"@fr ;
+    sh:path     jolux:entryIntoForceFor .
+
+tl:RegistrationShapeShape
+    a              sh:NodeShape ;
+    sh:targetClass jolux:Registration .
+
+jolux:RegistrationShape
+    sh:property
+        tl:isTaskOfTreatyProcessShape, tl:registrationByShape, tl:registrationDateShape, tl:registrationIdShape .
+
+tl:registrationIdShape
+    a           sh:PropertyShape ;
+    sh:class    xsd:literal ;
+    sh:maxCount 1 ;
+    sh:name     "Numéro d'enregistrement"@fr ;
+    sh:path     jolux:registrationId .
+
+tl:registrationByShape
+    a           sh:PropertyShape ;
+    sh:maxCount 1 ;
+    sh:name     "Partie qui enregistre le traité"@fr ;
+    sh:or       _:node1dvr30brkx989 .
+
+_:node1dvr30brkx989
+    rdf:first _:node1dvr30brkx990 .
+
+_:node1dvr30brkx990
+    sh:class jolux:InternationalActor .
+
+_:node1dvr30brkx989
+    rdf:rest _:node1dvr30brkx991 .
+
+_:node1dvr30brkx991
+    rdf:first _:node1dvr30brkx992 .
+
+_:node1dvr30brkx992
+    sh:class jolux:Country .
+
+_:node1dvr30brkx991
+    rdf:rest rdf:nil .
+
+tl:registrationByShape
+    sh:path jolux:registrationBy .
+
+tl:registrationDateShape
+    a           sh:PropertyShape ;
+    sh:datatype xsd:date ;
+    sh:maxCount 1 ;
+    sh:name     "Date d'enregistrement"@fr ;
+    sh:path     jolux:registrationDate .
+
+tl:NotificationShape
+    a              sh:NodeShape ;
+    sh:targetClass jolux:Notification .
+
+jolux:NotificationShape
+    sh:property tl:isTaskOfTreatyProcessShape, tl:notificationDateShape, tl:notificationDepositaryShape,
+                tl:notificationEntryIntoForceDateShape, tl:notificationFromShape, tl:notificationRelatedActShape,
+                tl:notificationScopeShape, tl:notificationTypeShape .
+
+tl:notificationTypeShape
+    a           sh:PropertyShape ;
+    sh:class    jolux:NotificationType ;
+    sh:maxCount 1 ;
+    sh:minCount 1 ;
+    sh:name     "Type de notification"@fr ;
+    sh:path     jolux:notificationType .
+
+tl:notificationFromShape
+    a           sh:PropertyShape ;
+    sh:maxCount 1 ;
+    sh:minCount 1 ;
+    sh:name     "Partie à l'origine de la notification"@fr ;
+    sh:or       _:node1dvr30brkx993 .
+
+_:node1dvr30brkx993
+    rdf:first _:node1dvr30brkx994 .
+
+_:node1dvr30brkx994
+    sh:class jolux:InternationalActor .
+
+_:node1dvr30brkx993
+    rdf:rest _:node1dvr30brkx995 .
+
+_:node1dvr30brkx995
+    rdf:first _:node1dvr30brkx996 .
+
+_:node1dvr30brkx996
+    sh:class jolux:Country .
+
+_:node1dvr30brkx995
+    rdf:rest rdf:nil .
+
+tl:notificationFromShape
+    sh:path jolux:notificationFrom .
+
+tl:notificationDepositaryShape
+    a           sh:PropertyShape ;
+    sh:maxCount 1 ;
+    sh:name     "Dépositaire de la notification"@fr ;
+    sh:or       _:node1dvr30brkx997 .
+
+_:node1dvr30brkx997
+    rdf:first _:node1dvr30brkx998 .
+
+_:node1dvr30brkx998
+    sh:class jolux:InternationalActor .
+
+_:node1dvr30brkx997
+    rdf:rest _:node1dvr30brkx999 .
+
+_:node1dvr30brkx999
+    rdf:first _:node1dvr30brkx1000 .
+
+_:node1dvr30brkx1000
+    sh:class jolux:Country .
+
+_:node1dvr30brkx999
+    rdf:rest rdf:nil .
+
+tl:notificationDepositaryShape
+    sh:path jolux:notificationDepositary .
+
+tl:notificationDateShape
+    a           sh:PropertyShape ;
+    sh:datatype xsd:date ;
+    sh:maxCount 1 ;
+    sh:name     "Date de la notification"@fr ;
+    sh:path     jolux:notificationDate .
+
+tl:notificationRelatedActShape
+    a           sh:PropertyShape ;
+    sh:class    jolux:NationalLegalResource ;
+    sh:maxCount 1 ;
+    sh:minCount 1 ;
+    sh:name     "Référence de l'acte"@fr ;
+    sh:path     jolux:notificationRelatedAct .
+
+tl:notificationScopeShape
+    a           sh:PropertyShape ;
+    sh:datatype xsd:string ;
+    sh:name     "Objet de la notification"@fr ;
+    sh:path     jolux:notificationScope .
+
+tl:notificationEntryIntoForceDateShape
+    a           sh:PropertyShape ;
+    sh:datatype xsd:date ;
+    sh:maxCount 1 ;
+    sh:name     "Date d'entrée en vigueur de la notification"@fr ;
+    sh:path     jolux:notificationEntryIntoForceDate .
