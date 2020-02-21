@@ -41,6 +41,7 @@ public class ShaclController {
 
     @GetMapping(value = "/xml", produces = MediaType.APPLICATION_XML_VALUE)
     public String rdfXmlConverter() {
+        //http://localhost:8080/convert/xml
         return shaclLoader.convert(Lang.RDFXML.getLabel());
     }
 
@@ -54,5 +55,14 @@ public class ShaclController {
     public String ttlConverter() {
         return shaclLoader.convert(Lang.TURTLE.getLabel());
 
+    }
+
+    @GetMapping(value = "/query-model", produces = MediaType.APPLICATION_XML_VALUE)
+    public String requestParameter(@RequestParam(value = "subject", required = false) String subject,
+                                   @RequestParam(value = "predicate", required = false) String predicate) {
+
+        // "http://www.dumbdata.orgoio/bilateralShape"
+        //   ResourceFactory.createProperty("http://www.w3.org/ns/shacl#name"
+        return shaclLoader.queryModel(subject, predicate, Lang.RDFXML.getLabel());
     }
 }
